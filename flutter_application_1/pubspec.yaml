@@ -27,6 +27,12 @@ flutter:
       # Based on your file explorer (for images)
     - assets/tiles/
     - assets/images/Terrain/   # <-- THIS LINE IS CRITICAL for level1.tmx 
+    - assets/images/Main Characters/Mask Dude/
+    - assets/images/Main Characters/Ninja Frog/
+    - assets/images/Main Characters/Pink Man/
+    - assets/images/Main Characters/Virtual Guy/
+    
+
 
 
 
