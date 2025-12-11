@@ -1,9 +1,10 @@
 import 'package:flame/components.dart';
+import 'package:flame/events.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/game.dart';
 import 'package:flutter_application_1/levels/level.dart'; // Import your Level class
 
-class PixelAdventure extends FlameGame {
+class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents {
   // 1. Declare the World instance
   @override
   late final World world;
