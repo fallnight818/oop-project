@@ -3,48 +3,39 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "level_01.tmx",
+    "activeFile": "Level-01.tmx",
     "expandedProjectPaths": [
         "."
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
-        "Pixel Adventure.tsx": {
-            "scaleInDock": 1,
-            "scaleInEditor": 1
-        },
-        "level_01.tmx": {
-            "scale": 2,
-            "selectedLayer": 1,
-            "viewCenter": {
-                "x": 354,
-                "y": 286.75
-            }
-        },
-        "level_2.tmx": {
-            "scale": 1,
+        "Level-01.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 2.159765625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 683,
-                "y": 183.5
+                "x": 320.1736299511666,
+                "y": 181.96418882257188
             }
+        },
+        "Pixel Adventure.tsx": {
+            "scaleInDock": 1
         }
     },
-    "last.imagePath": "D:/year3/java/oop pro/oop-project/flutter_application_1/assets/images/Terrain",
+    "last.imagePath": "C:/Users/Spellthorn/Desktop/pixel_adventure/assets/images/Terrain",
     "map.height": 23,
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
-    "map.width": 100,
+    "map.width": 40,
     "openFiles": [
-        "Pixel Adventure.tsx",
-        "level_01.tmx",
-        "level_2.tmx"
+        "Level-01.tmx"
     ],
     "project": "Pixel Adventure.tiled-project",
     "recentFiles": [
-        "Pixel Adventure.tsx",
-        "level_2.tmx",
-        "level_01.tmx"
+        "Level-01.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
