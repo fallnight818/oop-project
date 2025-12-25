@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flutter/src/services/hardware_keyboard.dart';
-import 'package:flutter/src/services/keyboard_key.g.dart';
 import 'package:flutter_application_1/pixel_Adventure.dart';
 
 enum PlayerState { idle, running }

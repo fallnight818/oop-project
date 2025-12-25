@@ -12,4 +12,4 @@ void main() {
 
   PixelAdventure game = PixelAdventure();
   runApp(GameWidget(game: kDebugMode ? game : PixelAdventure()));
-}
+}/////////////
