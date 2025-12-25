@@ -8,7 +8,7 @@ class BackgroundTile extends ParallaxComponent {
   final String color;
 
   BackgroundTile({
-    this.color = 'Pink',
+    this.color = '0',
     Vector2? position,
   }) : super(
           position: position,
