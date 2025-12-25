@@ -36,8 +36,8 @@ class Player extends SpriteAnimationGroupComponent
 
   @override
   void update(double dt) {
-    _updatePlayerMovement(dt);
     _updatePlayerState();
+    _updatePlayerMovement(dt);
     _checkHorizontalCollisions();
     _applyGravity(dt);
     _checkVerticalCollisions();
@@ -72,59 +72,26 @@ class Player extends SpriteAnimationGroupComponent
     );
   }
 
-   void _updatePlayerState() {
-    PlayerState playerState = PlayerState.idle;
-
+  void _updatePlayerState() {
     if (velocity.x < 0 && scale.x > 0) {
       flipHorizontallyAroundCenter();
-    } else if (velocity.x > 0 && scale.x < 0) {
-      flipHorizontallyAroundCenter();
-    }
-
-    // Check if moving, set running
-    if (velocity.x > 0 || velocity.x < 0) playerState = PlayerState.running;
-
-    // check if Falling set to falling
-    if (velocity.y > 0) playerState = PlayerState.falling;
-
-    // Checks if jumping, set to jumping
-    if (velocity.y < 0) playerState = PlayerState.jumping;
-
-    current = playerState;
+    } else if (velocity.x > 0 && scale.x < 0) flipHorizontallyAroundCenter();
+    
+    if (velocity.y > 0) {
+      current = PlayerState.falling;
+    } else if (velocity.y < 0) current = PlayerState.jumping;
+    else if (velocity.x != 0) current = PlayerState.running;
+    else current = PlayerState.idle;
   }
 
   void _updatePlayerMovement(double dt) {
-    if (hasJumped && isOnGround) _playerJump(dt);
-
-    // if (velocity.y > _gravity) isOnGround = false; // optional
-
+    if (hasJumped && isOnGround) {
+      velocity.y = -_jumpForce;
+      isOnGround = false;
+      hasJumped = false;
+    }
     velocity.x = horizontalMovement * moveSpeed;
     position.x += velocity.x * dt;
-  }
-
-  void _playerJump(double dt) {
-    velocity.y = -_jumpForce;
-    isOnGround = false;
-    hasJumped = false;
-  }
-
-  void _checkHorizontalCollisions() {
-    for (final block in collisionBlocks) {
-      if (!block.isPlatform) {
-        if (checkCollision(this, block)) {
-          if (velocity.x > 0) {
-            velocity.x = 0;
-            position.x = block.x - hitbox.offsetX - hitbox.width;
-            break;
-          }
-          if (velocity.x < 0) {
-            velocity.x = 0;
-            position.x = block.x + block.width + hitbox.width + hitbox.offsetX;
-            break;
-          }
-        }
-      }
-    }
   }
 
   void _applyGravity(double dt) {
@@ -133,30 +100,33 @@ class Player extends SpriteAnimationGroupComponent
     position.y += velocity.y * dt;
   }
 
-  void _checkVerticalCollisions() {
+  void _checkHorizontalCollisions() {
     for (final block in collisionBlocks) {
-      if (block.isPlatform) {
-        if (checkCollision(this, block)) {
-          if (velocity.y > 0) {
-            velocity.y = 0;
-            position.y = block.y - hitbox.height - hitbox.offsetY;
-            isOnGround = true;
-            break;
-          }
-        }
-      } else {
-        if (checkCollision(this, block)) {
-          if (velocity.y > 0) {
-            velocity.y = 0;
-            position.y = block.y - hitbox.height - hitbox.offsetY;
-            isOnGround = true;
-            break;
-          }
-          if (velocity.y < 0) {
-            velocity.y = 0;
-            position.y = block.y + block.height - hitbox.offsetY;
-          }
+      if (!block.isPlatform && checkCollision(this, block)) {
+        if (velocity.x > 0) {
+          velocity.x = 0;
+          position.x = block.x - hitbox.offsetX - hitbox.width;
+        } else if (velocity.x < 0) {
+          velocity.x = 0;
+          position.x = block.x + block.width + hitbox.width + hitbox.offsetX;
         }
       }
     }
   }
+
+  void _checkVerticalCollisions() {
+    for (final block in collisionBlocks) {
+      if (checkCollision(this, block)) {
+        if (velocity.y > 0) {
+          velocity.y = 0;
+          position.y = block.y - hitbox.height - hitbox.offsetY;
+          isOnGround = true;
+          break;
+        } else if (velocity.y < 0 && !block.isPlatform) {
+          velocity.y = 0;
+          position.y = block.y + block.height - hitbox.offsetY;
+        }
+      }
+    }
+  }
+}
