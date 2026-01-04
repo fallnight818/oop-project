@@ -1,44 +1,119 @@
+import 'dart:async';
+
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
-import 'package:flame/extensions.dart';
 import 'package:flame/game.dart';
-import 'package:flutter_application_1/levels/level.dart'; // Import your Level class
+import 'package:flame/input.dart';
+import 'package:flutter/painting.dart';
+import 'package:pixel_adventure/components/jump_button.dart';
+import 'package:pixel_adventure/components/player.dart';
+import 'package:pixel_adventure/components/level.dart';
 
-class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents {
-  // 1. Declare the World instance
+class PixelAdventure extends FlameGame
+    with
+        HasKeyboardHandlerComponents,
+        DragCallbacks,
+        HasCollisionDetection,
+        TapCallbacks {
   @override
-  late final World world;
+  Color backgroundColor() => const Color(0xFF211F30);
+  late CameraComponent cam;
+  Player player = Player(character: 'Mask Dude');
+  late JoystickComponent joystick;
+  bool showControls = false;
+  bool playSounds = true;
+  double soundVolume = 1.0;
+  List<String> levelNames = ['Level-01', 'Level-01'];
+  int currentLevelIndex = 0;
 
   @override
-  Color backgroundColor() => const Color.fromARGB(255, 18, 27, 37);
-  late final CameraComponent cam;
-
-  // 2. Initializing World here (or in the constructor)
-  // Assuming 'Level' is the component that holds your Tiled map.
-  PixelAdventure() : world = Level(); // Create an instance of your Level
-
-  @override
-  Future<void> onLoad() async {
+  FutureOr<void> onLoad() async {
+    // Load all images into cache
     await images.loadAllImages();
-    // 2. Load the World (Level)
-    add(Level());
-    // Wait for all assets to be loaded if needed (e.g., in a separate method)
 
-    // 3. Initialize the CameraComponent
-    cam = CameraComponent.withFixedResolution(
-      // Pass the initialized 'world' instance to the camera
-      world: world,
-      width: 640,
-      height: 360,
-    );
-    cam.viewfinder.anchor = Anchor.topLeft;
+    _loadLevel();
 
-    // 4. Add the CameraComponent and the World component to the Game
-
-    add(world); // Add the World (your Level) first
-    add(cam); // Add the Camera
+    if (showControls) {
+      addJoystick();
+      add(JumpButton());
+    }
 
     return super.onLoad();
-    // No need for super.onLoad() if the base class's implementation is empty
+  }
+
+  @override
+  void update(double dt) {
+    if (showControls) {
+      updateJoystick();
+    }
+    super.update(dt);
+  }
+
+  void addJoystick() {
+    joystick = JoystickComponent(
+      priority: 10,
+      knob: SpriteComponent(
+        sprite: Sprite(
+          images.fromCache('HUD/Knob.png'),
+        ),
+      ),
+      background: SpriteComponent(
+        sprite: Sprite(
+          images.fromCache('HUD/Joystick.png'),
+        ),
+      ),
+      margin: const EdgeInsets.only(left: 32, bottom: 32),
+    );
+
+    add(joystick);
+  }
+
+  void updateJoystick() {
+    switch (joystick.direction) {
+      case JoystickDirection.left:
+      case JoystickDirection.upLeft:
+      case JoystickDirection.downLeft:
+        player.horizontalMovement = -1;
+        break;
+      case JoystickDirection.right:
+      case JoystickDirection.upRight:
+      case JoystickDirection.downRight:
+        player.horizontalMovement = 1;
+        break;
+      default:
+        player.horizontalMovement = 0;
+        break;
+    }
+  }
+
+  void loadNextLevel() {
+    removeWhere((component) => component is Level);
+
+    if (currentLevelIndex < levelNames.length - 1) {
+      currentLevelIndex++;
+      _loadLevel();
+    } else {
+      // no more levels
+      currentLevelIndex = 0;
+      _loadLevel();
+    }
+  }
+
+  void _loadLevel() {
+    Future.delayed(const Duration(seconds: 1), () {
+      Level world = Level(
+        player: player,
+        levelName: levelNames[currentLevelIndex],
+      );
+
+      cam = CameraComponent.withFixedResolution(
+        world: world,
+        width: 640,
+        height: 360,
+      );
+      cam.viewfinder.anchor = Anchor.topLeft;
+
+      addAll([cam, world]);
+    });
   }
 }
