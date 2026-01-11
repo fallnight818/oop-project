@@ -10,7 +10,7 @@ void main() async {
   await Flame.device.setLandscape();
 
   PixelAdventure game = PixelAdventure();
-  runApp(
-    GameWidget(game: kDebugMode ? PixelAdventure() : game),
-  );
+  // runApp(
+  //   GameWidget(game: kDebugMode ? PixelAdventure() : game),
+  // );
 }
