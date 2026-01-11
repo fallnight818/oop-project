@@ -18,7 +18,7 @@ class Spikes extends SpriteAnimationComponent with HasGameRef<PixelAdventure> {
       game.images.fromCache('Traps/Spikes/Idle.png'),
       SpriteAnimationData.sequenced(
         amount: 1,
-        stepTime: 0.1,
+        stepTime: 1,
         textureSize: Vector2.all(16),
       ),
     );
