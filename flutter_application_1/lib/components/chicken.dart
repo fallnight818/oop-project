@@ -131,18 +131,24 @@ class Chicken extends SpriteAnimationGroupComponent
     }
   }
 
-  void collidedWithPlayer() async {
-    if (player.velocity.y > 0 && player.y + player.height > position.y) {
-      if (game.playSounds) {
-        FlameAudio.play('bounce.wav', volume: game.soundVolume);
+  @override
+  void onCollisionStart(
+      Set<Vector2> intersectionPoints, PositionComponent other) {
+    if (other is Player) {
+      if (other.velocity.y > 0 && other.y + other.height > position.y) {
+        if (game.playSounds) {
+          FlameAudio.play('bounce.wav', volume: game.soundVolume);
+        }
+        gotStomped = true;
+        current = State.hit;
+        other.velocity.y = -_bounceHeight;
+        animationTicker?.onComplete = () {
+          removeFromParent();
+        };
+      } else {
+        other.collidedwithEnemy();
       }
-      gotStomped = true;
-      current = State.hit;
-      player.velocity.y = -_bounceHeight;
-      await animationTicker?.completed;
-      removeFromParent();
-    } else {
-      player.collidedwithEnemy();
     }
+    super.onCollisionStart(intersectionPoints, other);
   }
 }

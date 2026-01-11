@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="46">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="63">
  <tileset firstgid="1" source="Pixel Adventure.tsx"/>
  <layer id="1" name="Background" width="40" height="23">
   <properties>
@@ -32,7 +32,7 @@
 </data>
  </layer>
  <objectgroup id="2" name="Spawnpoints">
-  <object id="4" name="Player" type="Player" x="128" y="224" width="32" height="32"/>
+  <object id="4" name="Player" type="Player" x="80.6817" y="225.604" width="32" height="32"/>
   <object id="21" name="Bananas" type="Fruit" x="80" y="80" width="32" height="32"/>
   <object id="22" name="Orange" type="Fruit" x="118.133" y="128.438" width="32" height="32"/>
   <object id="23" name="Apple" type="Fruit" x="80" y="176" width="32" height="32"/>
@@ -46,7 +46,7 @@
   <object id="31" name="Kiwi" type="Fruit" x="480" y="176" width="32" height="32"/>
   <object id="34" type="Saw" x="283.617" y="167.886" width="32" height="32">
    <properties>
-    <property name="isVertical" type="bool" value="false"/>
+    <property name="isVertical" type="bool" value="true"/>
     <property name="offNeg" type="float" value="4"/>
     <property name="offPos" type="float" value="3"/>
    </properties>
@@ -76,6 +76,62 @@
    <properties>
     <property name="offNeg" type="float" value="12"/>
     <property name="offPos" type="float" value="5"/>
+   </properties>
+  </object>
+  <object id="48" type="Spikes" x="187.709" y="289.163" width="14.7569" height="13.9549">
+   <properties>
+    <property name="isVertical" type="bool" value="true"/>
+    <property name="offNeg" type="float" value="4"/>
+    <property name="offPos" type="float" value="3"/>
+   </properties>
+  </object>
+  <object id="53" type="Spikes" x="384.2" y="175.88" width="15.1579" height="17.1629">
+   <properties>
+    <property name="isVertical" type="bool" value="true"/>
+    <property name="offNeg" type="float" value="4"/>
+    <property name="offPos" type="float" value="3"/>
+   </properties>
+  </object>
+  <object id="56" type="Spikes" x="498.085" y="143.8" width="15.1579" height="17.1629">
+   <properties>
+    <property name="isVertical" type="bool" value="true"/>
+    <property name="offNeg" type="float" value="4"/>
+    <property name="offPos" type="float" value="3"/>
+   </properties>
+  </object>
+  <object id="58" type="Spikes" x="128.962" y="242.045" width="14.7569" height="13.9549">
+   <properties>
+    <property name="isVertical" type="bool" value="true"/>
+    <property name="offNeg" type="float" value="4"/>
+    <property name="offPos" type="float" value="3"/>
+   </properties>
+  </object>
+  <object id="59" type="Spikes" x="80.0401" y="145.002" width="14.7569" height="13.9549">
+   <properties>
+    <property name="isVertical" type="bool" value="true"/>
+    <property name="offNeg" type="float" value="4"/>
+    <property name="offPos" type="float" value="3"/>
+   </properties>
+  </object>
+  <object id="60" type="Spikes" x="216.381" y="146.607" width="14.7569" height="13.9549">
+   <properties>
+    <property name="isVertical" type="bool" value="true"/>
+    <property name="offNeg" type="float" value="4"/>
+    <property name="offPos" type="float" value="3"/>
+   </properties>
+  </object>
+  <object id="61" type="Spikes" x="548.01" y="195.529" width="14.7569" height="13.9549">
+   <properties>
+    <property name="isVertical" type="bool" value="true"/>
+    <property name="offNeg" type="float" value="4"/>
+    <property name="offPos" type="float" value="3"/>
+   </properties>
+  </object>
+  <object id="62" type="Spikes" x="548.01" y="195.529" width="14.7569" height="13.9549">
+   <properties>
+    <property name="isVertical" type="bool" value="true"/>
+    <property name="offNeg" type="float" value="4"/>
+    <property name="offPos" type="float" value="3"/>
    </properties>
   </object>
  </objectgroup>

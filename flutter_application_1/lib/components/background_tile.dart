@@ -8,7 +8,7 @@ class BackgroundTile extends ParallaxComponent {
   final String color;
 
   BackgroundTile({
-    this.color = '0',
+    this.color = 'Pink',
     Vector2? position,
   }) : super(
           position: position,
@@ -21,7 +21,7 @@ class BackgroundTile extends ParallaxComponent {
     priority = -10;
     size = Vector2.all(64);
 
-    // ✅ USE game (NOT gameRef)
+
     parallax = await game.loadParallax(
       [
         ParallaxImageData('Background/$color.png'),
