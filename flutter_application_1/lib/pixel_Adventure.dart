@@ -6,8 +6,8 @@ import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flutter/painting.dart';
 //import 'package:pixel_adventure/components/jump_button.dart';
-import 'package:pixel_adventure/components/player.dart';
-import 'package:pixel_adventure/components/level.dart';
+import 'package:flutter_application_1/components/player.dart';
+import 'package:flutter_application_1/components/level.dart';
 
 class PixelAdventure extends FlameGame
     with
